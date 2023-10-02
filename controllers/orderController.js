@@ -16,9 +16,12 @@ const orderController = {
         totalPrice,
       } = req.body;
 
-      // Validate input data
-      // Add your validation logic here
-      // Ensure all required fields are present and in the correct format
+      // Validate and sanitize input data
+      if (!shippingInfo || !orderItems || !paymentInfo) {
+        return next(CustomErrorHandler.badRequest("Invalid order data."));
+      }
+
+      // Add more validation/sanitization based on your specific requirements
 
       const order = await Order.create({
         shippingInfo,
